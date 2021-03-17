@@ -25,12 +25,12 @@ output "cluster_role_unique_id" {
 }
 
 // EKS CLUSTER OUTPUTS
-output "id" {
+output "cluster_id" {
   value       = aws_eks_cluster.eks_cluster.id
   description = "The name of the cluster."
 }
 
-output "arn" {
+output "cluster_arn" {
   value       = aws_eks_cluster.eks_cluster.arn
   description = "The Amazon Resource Name (ARN) of the cluster."
 }
@@ -60,7 +60,7 @@ output "platform_version" {
   description = "The platform version for the cluster."
 }
 
-output "status" {
+output "cluster_status" {
   value       = aws_eks_cluster.eks_cluster.status
   description = "The status of the EKS cluster. One of CREATING, ACTIVE, DELETING, FAILED."
 }
@@ -107,11 +107,11 @@ output "nodegroup_role_unique_id" {
 }
 
 // EKS CLUSTER NODEGROUP OUTPUTS
-output "arn" {
+output "nodegroup_arn" {
   value       = aws_eks_node_group.eks_cluster_nodegroup.arn
   description = "Amazon Resource Name (ARN) of the EKS Node Group."
 }
-output "id" {
+output "nodegroup_id" {
   value       = aws_eks_node_group.eks_cluster_nodegroup.id
   description = "EKS Cluster name and EKS Node Group name separated by a colon (:)."
 }
@@ -119,7 +119,7 @@ output "autoscaling_groups" {
   value       = aws_eks_node_group.eks_cluster_nodegroup.resources.autoscaling_groups
   description = "List of objects containing information about AutoScaling Groups."
 }
-output "name" {
+output "autoscaling_groups_names" {
   value       = aws_eks_node_group.eks_cluster_nodegroup.resources.name
   description = "Name of the AutoScaling Group."
 }
@@ -127,7 +127,7 @@ output "remote_access_security_group_id" {
   value       = aws_eks_node_group.eks_cluster_nodegroup.resources.remote_access_security_group_id
   description = "Identifier of the remote access EC2 Security Group."
 }
-output "status" {
+output "nodegroup_status" {
   value       = aws_eks_node_group.eks_cluster_nodegroup.status
   description = "Status of the EKS Node Group."
 }
