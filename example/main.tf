@@ -15,7 +15,7 @@ provider "aws" {
 
 module "eks" {
   source  = "tmccoy14/eks/aws"
-  version = "0.0.8"
+  version = "0.1.0"
 
   cluster_name   = "testing-cluster"
   vpc_id         = "vpc-1234abcd"
