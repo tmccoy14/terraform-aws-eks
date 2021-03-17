@@ -1,15 +1,14 @@
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE A CLUSTER IAM ROLE
+# CREATE AN EKS CLUSTER IAM ROLE
 # ---------------------------------------------------------------------------------------------------------------------
 resource "aws_iam_role" "cluster_role" {
-  name               = var.cluster_role_name
   assume_role_policy = data.aws_iam_policy_document.assume_cluster_role.json
 
   tags = var.tags
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE A CLUSTER IAM POLICY
+# CREATE AN EKS CLUSTER IAM ROLE POLICY ATTACHMENT
 # ---------------------------------------------------------------------------------------------------------------------
 resource "aws_iam_role_policy_attachment" "cluster_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
@@ -17,7 +16,7 @@ resource "aws_iam_role_policy_attachment" "cluster_policy" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE A CLUSTER ROLE POLICY ATTACHMENT
+# CREATE AN EKS CLUSTER IAM ROLE POLICY ATTACHMENT
 # ---------------------------------------------------------------------------------------------------------------------
 resource "aws_iam_role_policy_attachment" "cluster_service_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
@@ -25,7 +24,7 @@ resource "aws_iam_role_policy_attachment" "cluster_service_policy" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE A CLUSTER
+# CREATE AN EKS CLUSTER
 # ---------------------------------------------------------------------------------------------------------------------
 resource "aws_eks_cluster" "eks_cluster" {
   name     = var.cluster_name
@@ -46,17 +45,16 @@ resource "aws_eks_cluster" "eks_cluster" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE A CLUSTER NODE GROUP IAM ROLE
+# CREATE AN EKS CLUSTER NODE GROUP IAM ROLE
 # ---------------------------------------------------------------------------------------------------------------------
 resource "aws_iam_role" "nodegroup_role" {
-  name               = var.nodegroup_role_name
   assume_role_policy = data.aws_iam_policy_document.assume_nodegroup_role.json
 
   tags = var.tags
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE A CLUSTER NODE GROUP IAM ROLE POLICY ATTACHMENT
+# CREATE AN EKS CLUSTER NODE GROUP IAM ROLE POLICY ATTACHMENT
 # ---------------------------------------------------------------------------------------------------------------------
 resource "aws_iam_role_policy_attachment" "worker_nodegroup_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
@@ -64,7 +62,7 @@ resource "aws_iam_role_policy_attachment" "worker_nodegroup_policy" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE A CLUSTER NODE GROUP IAM POLICY ATTACHMENT
+# CREATE AN EKS CLUSTER NODE GROUP IAM ROLE POLICY ATTACHMENT
 # ---------------------------------------------------------------------------------------------------------------------
 resource "aws_iam_role_policy_attachment" "cni_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
@@ -72,7 +70,7 @@ resource "aws_iam_role_policy_attachment" "cni_policy" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE A CLUSTER NODE GROUP IAM POLICY ATTACHMENT
+# CREATE AN EKS CLUSTER NODE GROUP IAM ROLE POLICY ATTACHMENT
 # ---------------------------------------------------------------------------------------------------------------------
 resource "aws_iam_role_policy_attachment" "ecr_readonly_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
@@ -80,7 +78,7 @@ resource "aws_iam_role_policy_attachment" "ecr_readonly_policy" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# CREATE A CLUSTER NODE GROUP
+# CREATE AN EKS CLUSTER NODE GROUP
 # ---------------------------------------------------------------------------------------------------------------------
 resource "aws_eks_node_group" "eks_cluster_nodegroup" {
   cluster_name    = aws_eks_cluster.eks_cluster.name
@@ -88,7 +86,7 @@ resource "aws_eks_node_group" "eks_cluster_nodegroup" {
   node_role_arn   = aws_iam_role.nodegroup_role.arn
   subnet_ids      = data.aws_subnet_ids.public.ids
 
-  instance_types = [var.instance_types]
+  instance_types = var.instance_types
 
   scaling_config {
     desired_size = var.desired_size

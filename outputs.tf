@@ -35,7 +35,7 @@ output "cluster_arn" {
   description = "The Amazon Resource Name (ARN) of the cluster."
 }
 
-output "certificate-authority" {
+output "certificate_authority" {
   value       = aws_eks_cluster.eks_cluster.certificate_authority
   description = "Nested attribute containing certificate-authority-data for your cluster."
 }
@@ -70,7 +70,7 @@ output "vpc_config" {
   description = "Additional nested attributes."
 }
 
-// EKS CLUSTER NODEGROUP IAM ROLE OUTPUTS
+// EKS CLUSTER NODE GROUP IAM ROLE OUTPUTS
 output "nodegroup_role_arn" {
   value       = aws_iam_role.nodegroup_role.arn
   description = "Amazon Resource Name (ARN) specifying the role."
@@ -96,7 +96,7 @@ output "nodegroup_role_unique_id" {
   description = "Stable and unique string identifying the role."
 }
 
-// EKS CLUSTER NODEGROUP OUTPUTS
+// EKS CLUSTER NODE GROUP OUTPUTS
 output "nodegroup_arn" {
   value       = aws_eks_node_group.eks_cluster_nodegroup.arn
   description = "Amazon Resource Name (ARN) of the EKS Node Group."
