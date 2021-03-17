@@ -2,6 +2,8 @@
 
 Terraform module that defines an EKS cluster and node group with IAM roles and policies.
 
+Terraform Registry - https://registry.terraform.io/modules/tmccoy14/eks/aws/latest
+
 ## Examples
 
 ```sh
