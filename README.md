@@ -12,10 +12,8 @@ module "eks" {
   # https://registry.terraform.io/modules/tmccoy14/eks/aws/latest
   version = "x.x.x"
 
-  cluster_role_name   = "testing-cluster-role"
   cluster_name        = "testing-cluster"
   vpc_id              = "vpc-1234abcd"
-  nodegroup_role_name = "testing-nodegroup-role"
   nodegroup_name      = "testing-nodegroup"
   desired_size        = "1"
   max_size            = "1"
@@ -46,18 +44,38 @@ module "eks" {
 
 ## Inputs
 
-| Name                | Description                                                | Type         | Default       | Required |
-| ------------------- | ---------------------------------------------------------- | ------------ | ------------- | -------- |
-| cluster_name        | Name of the cluster.                                       | string       |               | true     |
-| cluster_role_name   | The name of AWS EKS cluster role                           | string       |               | true     |
-| desired_size        | Desired number of worker nodes.                            | string       |               | true     |
-| max_size            | Maximum number of worker nodes.                            | string       |               | true     |
-| min_size            | Minimum number of worker nodes.                            | string       |               | true     |
-| nodegroup_name      | Name of the EKS Node Group.                                | string       |               | true     |
-| nodegroup_role_name | The name of AWS EKS nodegroup role.                        | string       |               | true     |
-| vpc_id              | The VPC associated with your cluster.                      | string       |               | true     |
-| instance_types      | List of instance types associated with the EKS Node Group. | list(string) | ["t3.medium"] | false    |
-| tags                | Key-value mapping of resource tags.                        | map(any)     | {}            | false    |
+| Name                                 | Description                                                                                                                                                                                         | Type         | Default       | Required |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------- | -------- |
+| cluster_role_description             | Description of the role.                                                                                                                                                                            | string       | null          | false    |
+| cluster_role_force_detach_policies   | Whether to force detaching any policies the role has before destroying it.                                                                                                                          | bool         | false         | false    |
+| cluster_role_inline_policy           | Configuration block defining an exclusive set of IAM inline policies associated with the IAM role.                                                                                                  | map(any)     | {}            | false    |
+| cluster_role_managed_policy_arns     | Set of exclusive IAM managed policy ARNs to attach to the IAM role.                                                                                                                                 | list(string) | []            | false    |
+| cluster_role_max_session_duration    | Maximum session duration (in seconds) that you want to set for the specified role.                                                                                                                  | string       | null          | false    |
+| cluster_role_name                    | Friendly name of the role. If omitted, Terraform will assign a random, unique name.                                                                                                                 | string       | null          | false    |
+| cluster_role_permissions_boundary    | ARN of the policy that is used to set the permissions boundary for the role.                                                                                                                        | string       | null          | false    |
+| cluster_name                         | Name of the cluster.                                                                                                                                                                                | string       |               | true     |
+| vpc_id                               | The VPC associated with your cluster.                                                                                                                                                               | string       |               | true     |
+| enable_cluster_log_type              | A list of the desired control plane logging to enable.                                                                                                                                              | list(string) | []            | flase    |
+| endpoint_private_access              | Indicates whether or not the Amazon EKS private API server endpoint is enabled.                                                                                                                     | bool         | false         | false    |
+| endpoint_public_access               | Indicates whether or not the Amazon EKS public API server endpoint is enabled.                                                                                                                      | bool         | false         | false    |
+| public_access_cidrs                  | List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled.                                                                                 | list(string) | ["0.0.0.0/0]  | false    |
+| security_group_ids                   | List of security group IDs for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.       | list(string) | []            | false    |
+| eks_version                          | Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. | string       | null          | false    |
+| nodegroup_role_description           | Description of the role.                                                                                                                                                                            | string       | null          | false    |
+| nodegroup_role_force_detach_policies | Whether to force detaching any policies the role has before destroying it.                                                                                                                          | bool         | false         | false    |
+| nodegroup_role_inline_policy         | Configuration block defining an exclusive set of IAM inline policies associated with the IAM role.                                                                                                  | map(any)     | {}            | false    |
+| nodegroup_role_managed_policy_arns   | Set of exclusive IAM managed policy ARNs to attach to the IAM role.                                                                                                                                 | list(string) | []            | false    |
+| nodegroup_role_max_session_duration  | Maximum session duration (in seconds) that you want to set for the specified role.                                                                                                                  | string       | null          | false    |
+| nodegroup_role_name                  | The name of AWS EKS nodegroup role.                                                                                                                                                                 | string       | null          | false    |
+| nodegroup_role_permissions_boundary  | ARN of the policy that is used to set the permissions boundary for the role.                                                                                                                        | string       | null          | false    |
+| desired_size                         | Desired number of worker nodes.                                                                                                                                                                     | string       |               | true     |
+| max_size                             | Maximum number of worker nodes.                                                                                                                                                                     | string       |               | true     |
+| min_size                             | Minimum number of worker nodes.                                                                                                                                                                     | string       |               | true     |
+| nodegroup_name                       | Name of the EKS Node Group.                                                                                                                                                                         | string       |               | true     |
+| instance_types                       | List of instance types associated with the EKS Node Group.                                                                                                                                          | list(string) | ["t3.medium"] | false    |
+| ami_type                             | Type of Amazon Machine Image (AMI) associated with the EKS Node Group.                                                                                                                              | string       | "AL2_x86_64"  | false    |
+| disk_size                            | Disk size in GiB for worker nodes.                                                                                                                                                                  | string       | "20"          | false    |
+| tags                                 | Key-value mapping of resource tags.                                                                                                                                                                 | map(any)     | {}            | false    |
 
 ## Outputs
 
