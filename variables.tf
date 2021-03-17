@@ -19,6 +19,11 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "nodegroup_role_name" {
+  description = "The name of AWS EKS nodegroup role."
+  type        = string
+}
+
 variable "nodegroup_name" {
   description = "Name of the EKS Node Group."
   type        = string

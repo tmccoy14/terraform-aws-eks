@@ -35,8 +35,8 @@ output "cluster_arn" {
   description = "The Amazon Resource Name (ARN) of the cluster."
 }
 
-output "certificate-authority-data" {
-  value       = aws_eks_cluster.eks_cluster.certificate_authority.data
+output "certificate-authority" {
+  value       = aws_eks_cluster.eks_cluster.certificate_authority
   description = "Nested attribute containing certificate-authority-data for your cluster."
 }
 
@@ -45,14 +45,9 @@ output "endpoint" {
   description = "The endpoint for your Kubernetes API server."
 }
 
-output "identity_oidc" {
-  value       = aws_eks_cluster.eks_cluster.identity.oidc
+output "identity" {
+  value       = aws_eks_cluster.eks_cluster.identity
   description = "Nested attribute containing identity provider information for your cluster. Only available on Kubernetes version 1.13 and 1.14 clusters created or upgraded on or after September 3, 2019."
-}
-
-output "idenetity_issuer" {
-  value       = aws_eks_cluster.eks_cluster.identity.issuer
-  description = "Issuer URL for the OpenID Connect identity provider."
 }
 
 output "platform_version" {
@@ -71,12 +66,12 @@ output "version" {
 }
 
 output "cluster_security_group_id" {
-  value       = aws_eks_cluster.eks_cluster.vpc_config.cluster_security_group_id
+  value       = aws_eks_cluster.eks_cluster.vpc_config[0]
   description = "The cluster security group that was created by Amazon EKS for the cluster."
 }
 
 output "vpc_id" {
-  value       = aws_eks_cluster.eks_cluster.vpc_config.vpc_id
+  value       = aws_eks_cluster.eks_cluster.vpc_config[1]
   description = "The VPC associated with your cluster."
 }
 
@@ -116,15 +111,15 @@ output "nodegroup_id" {
   description = "EKS Cluster name and EKS Node Group name separated by a colon (:)."
 }
 output "autoscaling_groups" {
-  value       = aws_eks_node_group.eks_cluster_nodegroup.resources.autoscaling_groups
+  value       = aws_eks_node_group.eks_cluster_nodegroup.resources[0]
   description = "List of objects containing information about AutoScaling Groups."
 }
 output "autoscaling_groups_names" {
-  value       = aws_eks_node_group.eks_cluster_nodegroup.resources.name
+  value       = aws_eks_node_group.eks_cluster_nodegroup.resources[1]
   description = "Name of the AutoScaling Group."
 }
 output "remote_access_security_group_id" {
-  value       = aws_eks_node_group.eks_cluster_nodegroup.resources.remote_access_security_group_id
+  value       = aws_eks_node_group.eks_cluster_nodegroup.resources[2]
   description = "Identifier of the remote access EC2 Security Group."
 }
 output "nodegroup_status" {

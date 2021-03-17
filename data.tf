@@ -40,5 +40,5 @@ data "aws_instances" "selected" {
     values = [data.aws_vpc.selected.id]
   }
 
-  depends_on = [aws_eks_node_group.eks-cluster-nodegroup]
+  depends_on = [aws_eks_node_group.eks_cluster_nodegroup]
 }
