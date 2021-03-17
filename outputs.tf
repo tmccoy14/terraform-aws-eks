@@ -65,14 +65,9 @@ output "version" {
   description = "The Kubernetes server version for the cluster."
 }
 
-output "cluster_security_group_id" {
-  value       = aws_eks_cluster.eks_cluster.vpc_config[0]
-  description = "The cluster security group that was created by Amazon EKS for the cluster."
-}
-
-output "vpc_id" {
-  value       = aws_eks_cluster.eks_cluster.vpc_config[1]
-  description = "The VPC associated with your cluster."
+output "vpc_config" {
+  value       = aws_eks_cluster.eks_cluster.vpc_config
+  description = "Additional nested attributes."
 }
 
 // EKS CLUSTER NODEGROUP IAM ROLE OUTPUTS
