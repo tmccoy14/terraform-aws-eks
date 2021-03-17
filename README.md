@@ -7,7 +7,10 @@ Terraform module that defines an EKS cluster and node group with IAM roles and p
 ```sh
 module "eks" {
   source  = "tmccoy14/eks/aws"
-  version = "x.x.x" # pin a specific version found at https://registry.terraform.io/modules/tmccoy14/eks/aws/latest
+  # pin a specific version found at:
+  # https://github.com/tmccoy14/terraform-aws-eks/releases
+  # https://registry.terraform.io/modules/tmccoy14/eks/aws/latest
+  version = "x.x.x"
 
   cluster_role_name   = "testing-cluster-role"
   cluster_name        = "testing-cluster"
