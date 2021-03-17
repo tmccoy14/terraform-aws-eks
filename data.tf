@@ -10,6 +10,18 @@ data "aws_iam_policy_document" "assume_cluster_role" {
   }
 }
 
+data "aws_iam_policy_document" "assume_nodegroup_role" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    effect  = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+  }
+}
+
 data "aws_vpc" "selected" {
   id = var.vpc_id
 }
